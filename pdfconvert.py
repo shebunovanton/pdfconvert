@@ -9,12 +9,16 @@ import os
 import pandas as pd
 import pdfkit
 
-
+def get_options():
+    return {
+        'encoding': 'UTF-8',
+        'enable-local-file-access': True
+    }
 def convertXlsPDF(file):
     config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
     df = pd.read_excel(file)
     df.to_html( file.replace(".xlsx","") + ".html")
-    pdfkit.from_file(file.replace(".xlsx","") + ".html" ,  file.replace(".html","") + ".pdf", configuration=config)
+    pdfkit.from_file(file.replace(".xlsx","") + ".html" ,  file.replace(".html","") + ".pdf", configuration=config, options=get_options(), verbose=True)
 
 def convertDoctoPDF(file):
     convert(file)
