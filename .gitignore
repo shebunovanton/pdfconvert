@@ -1,0 +1,6 @@
+*.xlsx
+*.pdf
+*.spec
+*.html
+build
+dist

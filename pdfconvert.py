@@ -6,6 +6,15 @@ from fpdf import FPDF
 from docx2pdf import convert
 import sys
 import os
+import pandas as pd
+import pdfkit
+
+
+def convertXlsPDF(file):
+    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    df = pd.read_excel(file)
+    df.to_html( file.replace(".xlsx","") + ".html")
+    pdfkit.from_file(file.replace(".xlsx","") + ".html" ,  file.replace(".html","") + ".pdf", configuration=config)
 
 def convertDoctoPDF(file):
     convert(file)
@@ -24,6 +33,8 @@ if __name__ == "__main__":
     for param in sys.argv: 
             if param.endswith('.docx'):
                 convertDoctoPDF(param)
+            elif param.endswith(".xlsx"):
+                 convertXlsPDF(param)    
             elif param.endswith(".exe"):
                  continue    
             else:
