@@ -5,7 +5,6 @@
 from fpdf import FPDF
 from docx2pdf import convert
 import sys
-import os
 import pandas as pd
 import pdfkit
 
@@ -27,7 +26,7 @@ def main(nameFile):
     pdf = FPDF()  
     pdf.add_page()
     pdf.set_font("Arial", size = 10)
-    f = open(nameFile, "r", encoding="latin1")
+    f = open(nameFile, "r", encoding="utf-8")
     for x in f:
         pdf.cell(0, 5, txt = x, ln = 1)
   
@@ -38,7 +37,8 @@ if __name__ == "__main__":
             if param.endswith('.docx'):
                 convertDoctoPDF(param)
             elif param.endswith(".xlsx"):
-                 convertXlsPDF(param)    
+                 #convertXlsPDF(param)
+                 pass    
             elif param.endswith(".exe"):
                  continue    
             else:
